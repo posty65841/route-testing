@@ -4,30 +4,31 @@ const assignmentSchema = require('./Assignment');
 // Schema to create Student model
 const studentSchema = new Schema(
   {
-    first: {
+    thoughtText: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 128,
+      min_length: 1,
     },
-    last: {
+   createdAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    username: {
       type: String,
       required: true,
-      max_length: 50,
+     
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    assignments: [assignmentSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
-      getters: true,
+      virtuals: true,
     },
   }
 );
 
-const Student = model('student', studentSchema);
+const Thought = model('thought', studentSchema);
 
-module.exports = Student;
+module.exports = Thought;
