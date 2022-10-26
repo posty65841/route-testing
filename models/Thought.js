@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const assignmentSchema = require('./Assignment');
 
 // Schema to create Student model
-const studentSchema = new Schema(
+const ThoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -28,7 +28,10 @@ const studentSchema = new Schema(
     },
   }
 );
+thoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
+});
 
-const Thought = model('thought', studentSchema);
+const Thought = model('thought', ThoughtSchema);
 
 module.exports = Thought;
